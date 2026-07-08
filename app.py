@@ -59,7 +59,7 @@ HTML_TEMPLATE = """
         button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50;
+            background-color: #0070f3;
             border: none;
             color: white;
             font-size: 16px;
@@ -69,7 +69,7 @@ HTML_TEMPLATE = """
             transition: background 0.3s;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #0051cb;
         }
         .result {
             margin-top: 20px;
@@ -122,7 +122,7 @@ def predict():
         final_features = [np.array(input_features)]
         prediction = model.predict(final_features)
         
-        # Format the output classification result
+        # Format output
         output = prediction[0]
         prediction_text = f'Predicted Class: {output}'
         
@@ -131,7 +131,6 @@ def predict():
 
     return render_template_string(HTML_TEMPLATE, prediction_text=prediction_text)
 
+# Essential for Vercel to treat this file correctly as a handler
 if __name__ == "__main__":
-    # Use the port assigned by Render dynamically
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(debug=True)
